@@ -11,6 +11,9 @@ namespace devmetal.td
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        private SpriteFont fontSmall;
+        private SpriteFont fontMedium;
+        private SpriteFont fontLarge;
 
         public Game1()
             : base()
@@ -40,6 +43,9 @@ namespace devmetal.td
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            fontSmall = Content.Load<SpriteFont>("FontSmall"); // Use the name of your sprite font file here instead of 'Score'.
+            fontMedium = Content.Load<SpriteFont>("FontMedium"); // Use the name of your sprite font file here instead of 'Score'.
+            fontLarge = Content.Load<SpriteFont>("FontLarge"); // Use the name of your sprite font file here instead of 'Score'.
 
             // TODO: use this.Content to load your game content here
         }
@@ -76,7 +82,13 @@ namespace devmetal.td
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
+            spriteBatch.Begin();
+
+            spriteBatch.DrawString(fontLarge, "Hello, World!", new Vector2(100, 0), Color.Black);
+            spriteBatch.DrawString(fontMedium, "Hello, World!", new Vector2(100, 100), Color.Black);
+            spriteBatch.DrawString(fontSmall, "Hello, World!", new Vector2(100, 200), Color.Black);
+
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }
