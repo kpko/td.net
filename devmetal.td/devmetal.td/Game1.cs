@@ -26,10 +26,10 @@ namespace devmetal.td
             graphics.PreferredBackBufferHeight = 600;
 
             IsMouseVisible = true;
-
             Content.RootDirectory = "Content";
 
-            states = new StateManager();
+
+            states = new StateManager(this);
             states.Add("menu", new MenuState());
             states.Add("win", new WinState());
             states.Add("help", new HelpState());
@@ -46,15 +46,7 @@ namespace devmetal.td
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-            //scene.Initialize();
-            //menuScreen.Initialize();
-
-            //scene.Entities.Add(new Zombie());
-            //scene.Entities.Add(new Tower());
-
             states.Initialize();
-
             base.Initialize();
         }
 
@@ -89,9 +81,6 @@ namespace devmetal.td
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
-
             states.Update(gameTime);
 
             base.Update(gameTime);

@@ -18,14 +18,16 @@ namespace devmetal.td.Core.UI
             UIElements = new List<UIElement>();
         }
 
-
         public override void Initialize()
         {
         }
 
         public override void Update(GameTime gameTime)
         {
-
+            foreach (var element in UIElements)
+            {
+                element.Update(gameTime);
+            }
         }
 
         public override void Draw(SpriteBatch batch)

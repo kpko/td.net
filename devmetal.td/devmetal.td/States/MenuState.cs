@@ -21,6 +21,17 @@ namespace devmetal.td.States
         public override void Initialize()
         {
             screen.Initialize();
+
+            screen.StartButton.Click += StartButton_Click;
+            screen.ExitButton.Click += (s, args) =>
+            {
+                this.StateManager.Exit();
+            };
+        }
+
+        void StartButton_Click(object sender, EventArgs e)
+        {
+            StateManager.ChangeState("game");
         }
 
         public override void Update(GameTime gameTime)

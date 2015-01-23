@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,11 +12,6 @@ namespace devmetal.td.Core
         public bool IsLoaded { get; set; }
 
         public StateManager StateManager { get;  internal set; }
-
-        public State()
-        {
-
-        }
 
         public virtual void Enter() { }
         public virtual void Leave() { }

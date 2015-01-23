@@ -9,19 +9,19 @@ namespace devmetal.td.Screens
 {
     class MenuScreen : Screen
     {
-        Button startButton;
-        Button helpButton;
-        Button exitButton;
+        public Button StartButton { get; private set; }
+        public Button HelpButton { get; private set; }
+        public Button ExitButton { get; private set; }
 
         public override void Initialize()
         {
-            startButton = new Button(new Vector2(100, 150), "Start");
-            helpButton = new Button(new Vector2(100, 250), "Hilfe");
-            exitButton = new Button(new Vector2(100, 350), "Ende");
+            StartButton = new Button(new Vector2(100, 150), "Start");
+            HelpButton = new Button(new Vector2(100, 250), "Hilfe");
+            ExitButton = new Button(new Vector2(100, 350), "Ende");
 
-            UIElements.Add(startButton);
-            UIElements.Add(helpButton);
-            UIElements.Add(exitButton);
+            UIElements.Add(StartButton);
+            UIElements.Add(HelpButton);
+            UIElements.Add(ExitButton);
         }
 
         public override void Load()

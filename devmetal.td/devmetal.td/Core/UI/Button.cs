@@ -11,10 +11,11 @@ namespace devmetal.td.Core.UI
     {
         public string Text;
 
+        public event EventHandler<EventArgs> Click;
+
         public Button(Vector2 position, string Text)
         {
-            this.Width = 600;
-            this.Height = 60;
+            this.Size = new Vector2(600, 60);
 
             this.Position = position;
             this.Text = Text;
@@ -29,7 +30,31 @@ namespace devmetal.td.Core.UI
             float x = this.Position.X + (this.Size.X / 2) - (fontWidth / 2);
             float y = this.Position.Y;
 
-            batch.DrawString(Resources.FontLarge, Text, new Vector2(x, y), Color.White);
+            Color fontColor = Color.White;
+
+            //if (!this.IsMouseOver)
+            //{
+            //    fontColor = Color.White;
+            //}
+            if (this.IsMouseOver && !this.IsMouseDown)
+            {
+                fontColor = Color.Gold;
+            }
+
+            else if (this.IsMouseOver && this.IsMouseDown)
+            {
+                fontColor = Color.Yellow;
+            }
+
+            batch.DrawString(Resources.FontLarge, Text, new Vector2(x, y), fontColor);
+        }
+
+        public override void OnClick()
+        {
+            if (this.Click != null)
+            {
+                this.Click(this, new EventArgs());
+            }
         }
     }
 }

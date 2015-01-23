@@ -3,6 +3,7 @@ using devmetal.td.Entities;
 using devmetal.td.Modules;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +29,11 @@ namespace devmetal.td.States
 
         public override void Update(GameTime gameTime)
         {
+            if (Keyboard.GetState().IsKeyDown(Keys.Escape))
+            {
+                this.StateManager.ChangeState("menu");
+            }
+
             scene.Update(gameTime);
         }
 

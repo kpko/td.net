@@ -9,12 +9,15 @@ namespace devmetal.td.Core
 {
     public class StateManager : Module
     {
-        protected Dictionary<string, State> States { get; set; }
         public State CurrentState { get; protected set; }
 
-        public StateManager()
+        protected Dictionary<string, State> states;
+        protected Game game;
+
+        public StateManager(Game game)
         {
-            States = new Dictionary<string, State>();
+            this.game = game;
+            states = new Dictionary<string, State>();
         }
 
         public void ChangeState(State state)
@@ -39,19 +42,24 @@ namespace devmetal.td.Core
             name = name.Trim().ToLower();
 
             state.StateManager = this;
-            this.States.Add(name, state);
+            this.states.Add(name, state);
         }
 
         public void ChangeState(string stateName)
         {
             stateName = stateName.Trim().ToLower();
 
-            ChangeState(States[stateName]);
+            ChangeState(states[stateName]);
+        }
+
+        public void Exit()
+        {
+            game.Exit();
         }
 
         public override void Initialize()
         {
-            foreach (var state in this.States.Values)
+            foreach (var state in this.states.Values)
             {
                 state.Initialize();
             }
@@ -64,7 +72,7 @@ namespace devmetal.td.Core
 
         public override void Unload()
         {
-            foreach (var state in this.States.Values)
+            foreach (var state in this.states.Values)
             {
                 if (state.IsLoaded)
                 {
@@ -82,5 +90,7 @@ namespace devmetal.td.Core
         {
             this.CurrentState.Draw(spriteBatch);
         }
+
+        
     }
 }
