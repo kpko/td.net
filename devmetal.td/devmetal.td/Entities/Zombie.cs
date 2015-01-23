@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using devmetal.td.Core;
 
-namespace devmetal.td
+namespace devmetal.td.Entities
 {
     class Zombie : Entity
     {

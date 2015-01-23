@@ -1,4 +1,9 @@
-﻿using Microsoft.Xna.Framework;
+﻿using devmetal.td.Core;
+using devmetal.td.Core.UI;
+using devmetal.td.Entities;
+using devmetal.td.Modules;
+using devmetal.td.States;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -11,8 +16,7 @@ namespace devmetal.td
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Scene scene;
-        UI ui;
+        StateManager states;
 
         public Game1()
             : base()
@@ -24,8 +28,14 @@ namespace devmetal.td
             IsMouseVisible = true;
 
             Content.RootDirectory = "Content";
-            scene = new Scene();
-            ui = new UI();
+
+            states = new StateManager();
+            states.Add("menu", new MenuState());
+            states.Add("win", new WinState());
+            states.Add("help", new HelpState());
+            states.Add("game", new GameState());
+
+            states.ChangeState("menu");
         }
 
         /// <summary>
@@ -37,11 +47,13 @@ namespace devmetal.td
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            scene.Initialize();
-            ui.Initialize();
+            //scene.Initialize();
+            //menuScreen.Initialize();
 
-            scene.Entities.Add(new Zombie());
-            scene.Entities.Add(new Tower());
+            //scene.Entities.Add(new Zombie());
+            //scene.Entities.Add(new Tower());
+
+            states.Initialize();
 
             base.Initialize();
         }
@@ -54,9 +66,10 @@ namespace devmetal.td
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+
             Resources.Load(this.Content);
 
-            // TODO: use this.Content to load your game content here
+            states.Load();
         }
 
         /// <summary>
@@ -66,6 +79,7 @@ namespace devmetal.td
         protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
+            states.Unload();
         }
 
         /// <summary>
@@ -78,8 +92,7 @@ namespace devmetal.td
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
-            scene.Update(gameTime);
+            states.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -92,8 +105,7 @@ namespace devmetal.td
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            scene.Draw(spriteBatch);
-            //ui.Draw(spriteBatch);
+            states.Draw(spriteBatch);
 
             base.Draw(gameTime);
         }

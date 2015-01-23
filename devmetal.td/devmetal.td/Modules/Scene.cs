@@ -1,13 +1,14 @@
-﻿using Microsoft.Xna.Framework;
+﻿using devmetal.td.Core;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace devmetal.td
+namespace devmetal.td.Modules
 {
-    class Scene 
+    class Scene : Module
     {
         public List<Entity> Entities { get; set; }
 
@@ -16,7 +17,7 @@ namespace devmetal.td
             this.Entities = new List<Entity>();
         }
 
-        public void Initialize()
+        public override void Initialize()
         {
             foreach (var entity in this.Entities)
             {
@@ -24,7 +25,7 @@ namespace devmetal.td
             }
         }
 
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
             foreach (var entity in this.Entities)
             {
@@ -32,18 +33,12 @@ namespace devmetal.td
             }
         }
 
-        public void Draw(SpriteBatch batch)
+        public override void Draw(SpriteBatch batch)
         {
-            batch.Begin(samplerState: SamplerState.PointClamp);
-
-            batch.Draw(Resources.map5, position: Vector2.Zero);
-
             foreach (var entity in this.Entities)
             {
                 entity.Draw(batch);
             }
-
-            batch.End();
         }
     }
 }

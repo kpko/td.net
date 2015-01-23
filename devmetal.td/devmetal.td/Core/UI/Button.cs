@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace devmetal.td
+namespace devmetal.td.Core.UI
 {
     public class Button : UIElement
     {

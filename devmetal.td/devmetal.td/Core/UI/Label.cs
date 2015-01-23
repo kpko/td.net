@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace devmetal.td
+namespace devmetal.td.Core.UI
 {
-    class Label : UIElement
+    public class Label : UIElement
     {
     }
 }
